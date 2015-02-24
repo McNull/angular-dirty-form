@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../bower_components/angular-inform/dist/angular-inform.min.css">
   <script src="../bower_components/angular-inform/dist/angular-inform.min.js"></script>
   <link rel="stylesheet" href="style.css" />
-  <script src="../dist/angular-dirty-form.min.js"></script>
+  <script src="../src/angular-dirty-form.js"></script>
   <script src="script.js"></script>
 </head>
 
@@ -21,10 +21,15 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="#/">Angular Dirty Form</a>
       </div>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav">
        <li ng-repeat="route in routes" ng-class="{ active: isActiveRoute(route) }">
          <a ng-href="#{{ route.originalPath }}">{{ route.text }}</a>
        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-class="{ active: config.visible }">
+          <a href="" ng-click="config.visible = !config.visible"><i class="glyphicon glyphicon-cog"></i> Config</a>
+        </li>
       </ul>
     </div>
   </nav>

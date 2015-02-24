@@ -28,14 +28,6 @@ dirtyForm.factory('dirtyFormLinkFn', function (dirtyFormConfig, $q, $location) {
 
   return function ($scope, $element, $attrs, $form) {
 
-    var message = dirtyFormConfig.message;
-
-    $attrs.$observe('dirtyForm', function (value) {
-      if (value) {
-        message = value;
-      }
-    });
-
     var forceChange = false,
       resolving = false;
 
@@ -46,6 +38,8 @@ dirtyForm.factory('dirtyFormLinkFn', function (dirtyFormConfig, $q, $location) {
         event.preventDefault();
       } else if ($form.$dirty && !forceChange) {
 
+        var message = $attrs.dirtyForm || dirtyFormConfig.message;
+        
         var p = dirtyFormConfig.confirm(message);
 
         if (p !== true) {
@@ -59,7 +53,7 @@ dirtyForm.factory('dirtyFormLinkFn', function (dirtyFormConfig, $q, $location) {
 
           var resolve = function (v) {
             if (v) {
-              $location.path(next);
+              $location.$$parse(next);
               forceChange = true;
             }
           };

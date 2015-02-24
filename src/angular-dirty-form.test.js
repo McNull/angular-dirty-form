@@ -16,6 +16,10 @@ describe('angular-dirty-form', function () {
       $timeout = _$timeout_;
       $location = _$location_;
 
+      $location.$$parse = function(url) {
+        $location.$$path = url;
+      };
+      
     });
 
     inject(function (_dirtyFormLinkFn_, _dirtyFormConfig_) {
