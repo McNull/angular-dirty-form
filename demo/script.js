@@ -1,9 +1,9 @@
 var app = angular.module('myApp', ['ngRoute', 'dirtyForm', 'inform', 'ngAnimate', 'ui.bootstrap', 'ui.bootstrap.dialog']);
 
-// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Supply our demo app some routes
 // Note: dirtyForm doesn't depend on routing.
-// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.config(function ($routeProvider) {
 
@@ -28,7 +28,11 @@ app.config(function ($routeProvider) {
 
 });
 
-// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+app.config(function($locationProvider) {
+  $locationProvider.hashPrefix('');
+});
+
+// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.controller('View1Ctrl', function ($scope, $location, inform) {
 
@@ -47,7 +51,7 @@ app.controller('View1Ctrl', function ($scope, $location, inform) {
 
 });
 
-// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.controller('View2Ctrl', function ($scope, $location, inform) {
 
@@ -66,11 +70,11 @@ app.controller('View2Ctrl', function ($scope, $location, inform) {
 
 });
 
-// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // The main controller. This is just here to setup the demo and can be ignored.
-// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - 8-< - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-app.controller('MainCtrl', function ($scope, $location, $route, dirtyFormConfig, $dialog, $modal, $window) {
+app.controller('MainCtrl', function ($scope, $location, $route, dirtyFormConfig, $dialog, $uibModal, $window) {
 
   $scope.config = dirtyFormConfig;
   $scope.config.defaultMessage = dirtyFormConfig.message;
@@ -93,7 +97,7 @@ app.controller('MainCtrl', function ($scope, $location, $route, dirtyFormConfig,
   $scope.$watch('config.visible', function (value) {
 
     if (value) {
-      var modalInstance = $modal.open({
+      var uibModalInstance = $uibModal.open({
         templateUrl: '/demo/config.html',
         scope: $scope,
         size: 'lg'
@@ -148,6 +152,6 @@ app.controller('MainCtrl', function ($scope, $location, $route, dirtyFormConfig,
       c += '});';
 
       return c;
-    } 
+    }
   };
 });
